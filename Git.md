@@ -66,6 +66,8 @@
 
 `git rm <file>`
 
-## commit所有tracked的文件（stage中的文件）改变
+## commit所有tracked的文件（git能识别到的文件）改变
 
 `git commit -a`
+
+## commit stage空间中的改变
