@@ -70,4 +70,52 @@
 
 `git commit -a`
 
-## commit stage空间中的改变
+相当于
+
+`git add .`
+
+`git commit`
+
+## commit stage空间中的改变（staged文件）
+
+`git commit`
+
+## 改变最后一次commit（修改上次commit的messages）
+
+`git commit --amend`
+
+注意：你不应该amend已经发布的commits
+
+## commit历史
+
+## 查看所有的commits
+
+`git log`
+
+## 显示指定文件随时间的变化
+
+`git log -p <file>`
+
+## 显示指定committer随时间的变化
+
+`git log --author=<committer name>`
+
+注意：<committer name>是一个pattern，所以Ed匹配Edward Smith。如果pattern有空格，那么得引号包裹。
+
+pattern：类似于正则表达式中的匹配符
+
+## 根据给定的字符串搜索（grep）commit的messages
+
+`git log --grep=<string>`
+
+## 查看是谁在何时改变了文件的哪些内容
+
+`git blame <file>`
+
+## 临时储存changes（切换分支时临时保存当前工作区和stage区的更改，即保留当前工作现场）
+
+`git stash`
+
+## 还原并删除stashed的changes
+
+`git stash pop`
