@@ -1,3 +1,32 @@
+# 配置ssh连接
+
+- 生成一个密钥(ssh key)，默认生成在~/.ssh/id_rsa
+
+`ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
+
+- 添加生成的密钥到ssh-agent
+
+启动ssh-agent
+
+`eval $(ssh-agent -s)`
+
+eval能够执行后面的语句，如
+```
+xxx@xxx ~/ $ export foo="uname -a"
+xxx@xxx ~/ $ echo ${foo}
+uname -a
+xxx@xxx ~/ $ eval ${foo}
+MINGW64_NT-10.0 DESKTOP-S2CIOP8 2.10.0(0.325/5/3) 2018-03-15 14:12 x86_64 Msys
+```
+
+添加刚刚生成的密钥到ssh-agent
+
+`ssh-add ~/.ssh/id_rsa`
+
+如果是Windows用户，可以设置ssh-agent自动启动
+
+https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-git-for-windows
+
 # 创建仓库
 
 ## 克隆(Clone)一个已经存在的仓库
