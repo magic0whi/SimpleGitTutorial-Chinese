@@ -236,14 +236,100 @@ pattern：类似于正则表达式中的匹配符
 
 `git add <resolved-file>`
 
- 强行删除，最为致命
+强行删除，最为致命
 
- `git rm <resolved-file>`
+`git rm <resolved-file>`
 
- # 撤销操作（Undo）
+# 撤销操作（Undo）
 
- ## 丢弃指定文件的更改
+## 撤销工作区（working directory）的所有更改
+
+`git reset --hard HEAD`
+
+## 丢弃指定文件的更改
 
 --hard 同时清理stage空间和工作空间的对应文件
 
- `git reset --hard HEAD`
+`git checkout HEAD <file>`
+
+## 创建一个相反changes的commit还原（Revert）一个commit的更改
+
+`git revert <commit>`
+
+## 从以前的commit恢复文件
+
+`git checkout <commit> <file>`
+
+## 重置（Reset）HEAD指针到**以前的commit**
+
+- 撤销本地所有的changes（重置工作目录和stage空间并更改HEAD）
+
+`git reset --hard <commit>`
+
+- 保留所有changes为unstaged的changes（只清理stage空间和更改HEAD）
+
+`git reset <commit>`
+
+- 保留uncommitted的本地changes（清理工作目录但不清理stage空间并更改HEAD。**同时，如果有某个文件在<commit>与HEAD之间有修改并且在stage空间中也有修改，此次reset将被中止**）
+
+`git reset --keep <commit>`
+
+# 子模块（submodules）
+
+## 子模块相当于嵌套在Git中的Git仓库，它同样可以做平常Git仓库能做的事
+
+子模块是为了多团队开发而设计
+
+## 列出当前配置的submodules
+
+`git submodule`
+
+或者
+
+`git submodule status`
+
+## 查看某个submodule的信息
+
+`git remote show <remote>`
+
+## 添加一个新的submodule
+
+注意：如果你想删除子模块并将它的所有文件add到外面的Git仓库中，那么请在submodule的名字后面加上一个正斜杠(/)
+
+1. 执行 `git submodule add -b <branch> --name <name> <repository-path-or-url>`
+
+2. 添加 `.gitmodule` 文件和`submodule的文件夹`到超级项目（submodule外面git仓库，原文superproject）的目录（index）中。
+
+3. 在subproject提交（commit）此次更改
+
+## 删除一个子模块
+
+1. 从`.gitmodules`删除相应的行
+
+2. 从`.git/config`删除相关部分
+
+3. 运行 `git rm --cached <submodule-path>`(路径不用后跟斜杠(/))
+
+4. 在subproject提交(commit)此次更改
+
+5. 现在可以删除未追踪（untracked)的模块文件了
+
+## 克隆(Clone)一个带有submodules的仓库
+
+1. 首先像平时那样Clone superproject的仓库
+
+2. 执行`git submodule init`来初始化submodules
+
+3. 执行`git submodule update`来抓取submodules
+
+或者
+
+直接执行`git clone --recurse-submodules ssh://user@domain.tld/repo.git`
+
+## 查看submodules的changes
+
+`git diff --submodule`
+
+## 更新submodules各自的分支到最新的commit
+
+`git submodule update --remote`
