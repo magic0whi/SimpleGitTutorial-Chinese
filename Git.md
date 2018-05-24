@@ -1,26 +1,26 @@
 # 创建仓库
 
-## Clone 一个已经存在的仓库
+## 克隆(Clone)一个已经存在的仓库
 
-`git cloene ssh://user@domain.tld/repo.git`
+`git clone ssh://user@domain.tld/repo.git`
 
-## 递归Clone一个已经存在的仓库和它所有的子模块
+## 递归克隆一个已经存在的仓库和它所有的子模块
 
 `git clone --recurse-submodules ssh://user@domain.tld/repo.git`
 
-## 创建一个新的本地仓库
+## 创建一个新的本地仓库(local repository)
 
 `git init`
 
 # 配置
 
-貌似所有没有--global的设置都储存在当前项目仓库中
+所有没有--global的设置都储存在当前项目仓库中
 
-## 设置commit时你的署名
+## 设置提交(commit)时你的署名
 
 `git config [--global] user.name <name>`
 
-## 设置commit时你的邮箱
+## 设置提交时你的邮箱
 
 `git config [--global] user.email <email>`
 
@@ -36,9 +36,9 @@
 
 `git config [--global] user.email`
 
-# 管理本地改变
+# 管理本地改动(changes)
 
-## 列出当前工作目录下的文件改变(状态)
+## 列出当前工作目录下的文件改动(状态)
 
 `git status`
 
@@ -50,7 +50,7 @@
 
 `git add <file>`
 
-## 同步所有更改的文件到stage空间（为commit做准备）
+## 同步所有更改的文件到stage空间（为提交做准备）
 
 `git add .`
 
@@ -66,29 +66,29 @@
 
 `git rm <file>`
 
-## commit所有tracked的文件（git能识别到的文件）改变
+## 提交所有追踪(tracked)的文件（git能识别到的文件）改动
 
 `git commit -a`
 
-相当于
+也可以
 
 `git add .`
 
 `git commit`
 
-## commit stage空间中的改变（staged文件）
+## 提交stage空间中的改动（staged文件）
 
 `git commit`
 
-## 改变最后一次commit（修改上次commit的messages）
+## 修改上次提交的信息(messages)
 
 `git commit --amend`
 
-注意：你不应该amend已经发布到远程服务器的commits
+注意：你不应该修订(amend)已经发布到远程服务器的提交
 
-## commit历史
+# 提交历史
 
-## 查看所有的commits
+## 查看所有的提交
 
 `git log`
 
@@ -96,7 +96,7 @@
 
 `git log -p <file>`
 
-## 显示指定committer随时间的变化（查看他的commits）
+## 显示指定提交者(committer)随时间的变化（查看他的commits）
 
 `git log --author=<committer name>`
 
@@ -104,7 +104,7 @@
 
 pattern：类似于正则表达式中的匹配符
 
-## 根据给定的字符串搜索（grep）commit的messages
+## 根据给定的字符串搜索（grep）提交的信息
 
 `git log --grep=<string>`
 
@@ -112,11 +112,11 @@ pattern：类似于正则表达式中的匹配符
 
 `git blame <file>`
 
-## 临时储存changes（切换分支时临时保存当前工作区和stage区的更改，即保留当前工作现场）
+## 临时储存当前改动（切换分支时临时保存当前工作区和stage区的更改，即保留当前工作现场）
 
 `git stash`
 
-## 还原并删除stashed的changes
+## 还原并删除stashed的工作现场
 
 `git stash pop`
 
@@ -124,7 +124,7 @@ pattern：类似于正则表达式中的匹配符
 
 `git rm --cached <file>`
 
-# 分支&标签
+# 分支(Branches)&标签(Tags)
 
 ## 列出所有分支
 
@@ -140,7 +140,7 @@ pattern：类似于正则表达式中的匹配符
 
 `git branch <new-branch>`
 
-## 基于远程分支创建一个新的tracking分支（--track自动设置上游分支仓库）
+## 基于远程分支创建一个新的追踪(tracking)分支（--track自动设置上游分支仓库）
 
 `git branch --track <new-branch> <remote-branch>`
 
@@ -156,23 +156,23 @@ pattern：类似于正则表达式中的匹配符
 
 `git branch -m <old name> <new name>`
 
-##  重命名远程分支
+## 重命名远程分支
 
 `git push <remote> :<old name>`
 
 `git push <remote> <new name>`
 
-## 给当前commit添加标记（Tag）
+## 给当前提交添加标签
 
 `git tag <tag-name>`
 
-# 更新 & 推送
+# 更新(Pull) & 推送(Push)
 
-## 列出当前配置的remotes
+## 列出当前配置的远程仓库(remotes)
 
 `git remote -v`
 
-## 查看某个remote的信息
+## 查看某个远程仓库的信息
 
 `git remote show <remote>`
 
@@ -180,23 +180,23 @@ pattern：类似于正则表达式中的匹配符
 
 `git remote add <remote> <url>`
 
-## 重命名一个remote
+## 重命名一个远程仓库
 
 `git remote rename <old-name> <new-name>`
 
-## 下载所有remote的changes，但是不合并（merge）到HEAD
+## 下载所有远程仓库的改动，但是**不合并(merge)到HEAD**
 
 `git fetch <remote>`
 
-## 下载所有remote的changes，但是不merge到HEAD**也不清理remote上已经删除的branches**
+## 下载所有远程仓库的改动，但是不合并到HEAD**也不清理远程仓库上已经删除的分支**
 
 `git fetch -p <remote>`
 
-## 下载changes同时直接merge到HEAD
+## 下载改动(changes)同时直接合并到HEAD
 
 `git pull <remote> <branch>`
 
-## 推送本地的changes到remote
+## 推送本地的改动到远程仓库
 
 `git push <remote> <branch>`
 
@@ -204,13 +204,22 @@ pattern：类似于正则表达式中的匹配符
 
 `git remote add --track <remote-branch> <remote> <url>`
 
-## 推送当前tags
+## 推送当前标签
 
 `git push --tags`
 
-## Merge & Rebase
+## 合并(Merge) & 复位基底Rebase
 
-## Merge分支到当前的HEAD
+```
+Rebase介绍详情请见
+https://isming.info/2014/09/26/git-rebase-merge/
+和
+https://github.com/geeeeeeeeek/git-recipes/wiki/5.1-%E4%BB%A3%E7%A0%81%E5%90%88%E5%B9%B6%EF%BC%9AMerge%E3%80%81Rebase-%E7%9A%84%E9%80%89%E6%8B%A9
+```
+总之Rebase和Merge的区别在于merge会增加一个commit来合并，而用rebase会让git log查看时更平滑，rebase也被用来在本地的一些commits还没推送时修改commit的附带信息，详情请见
+https://gist.github.com/nepsilon/156387acf9e1e72d48fa35c4fabef0b4#not-pushed--old-commit
+
+## 合并分支到当前的HEAD
 
 `git merge <branch>`
 
@@ -218,7 +227,7 @@ pattern：类似于正则表达式中的匹配符
 
 `git merge <branch>`
 
-注意：你不因该rebase公共的remote！（否则别人会？？？）
+注意：你不因该rebase公共的remote！（否则会干扰别人）
 
 ## 驳回当前的rebase操作
 
@@ -228,7 +237,7 @@ pattern：类似于正则表达式中的匹配符
 
 `git rebase --continue`
 
-## 解决冲突（用你配置的merge工具）
+## 解决冲突（用你配置的合并工具）
 
 `git mergetool`
 
@@ -240,37 +249,41 @@ pattern：类似于正则表达式中的匹配符
 
 `git rm <resolved-file>`
 
-# 撤销操作（Undo）
+# 撤销操作(Undo)
 
-## 撤销工作区（working directory）的所有更改
+## 撤销工作区(working directory)的所有更改
 
 `git reset --hard HEAD`
 
-## 丢弃指定文件的更改
+--soft – 缓存区和工作目录都不会被改变
 
---hard 同时清理stage空间和工作空间的对应文件
+--mixed – 默认选项。缓存区和你指定的提交同步，但工作目录不受影响
+
+--hard – 缓存区和工作目录都同步到你指定的提交
+
+## 丢弃指定文件的改动
 
 `git checkout HEAD <file>`
 
-## 创建一个相反changes的commit还原（Revert）一个commit的更改
+## 创建一个相反改动(changes)的提交来还原（Revert）一个提交的更改
 
 `git revert <commit>`
 
-## 从以前的commit恢复文件
+## 从以前的某次提交恢复文件
 
 `git checkout <commit> <file>`
 
-## 重置（Reset）HEAD指针到**以前的commit**
+## 重置（Reset）HEAD指针到**以前的提交**
 
-- 撤销本地所有的changes（重置工作目录和stage空间并更改HEAD）
+- 撤销本地所有的改动（重置工作目录和stage空间并更改HEAD）
 
 `git reset --hard <commit>`
 
-- 保留所有changes为unstaged的changes（只清理stage空间和更改HEAD）
+- 保留所有改动但将它们unstaged（只清理stage空间和更改HEAD）
 
 `git reset <commit>`
 
-- 保留uncommitted的本地changes（清理工作目录但不清理stage空间并更改HEAD。**同时，如果有某个文件在<commit>与HEAD之间有修改并且在stage空间中也有修改，此次reset将被中止**）
+- 保留未提交(uncommitted)的本地改动（清理工作目录但不清理stage空间并更改HEAD。**同时，如果有某个文件在<commit>与HEAD之间有修改并且在stage空间中也有修改，此次reset将被中止**）
 
 `git reset --keep <commit>`
 
@@ -280,7 +293,7 @@ pattern：类似于正则表达式中的匹配符
 
 子模块是为了多团队开发而设计
 
-## 列出当前配置的submodules
+## 列出当前配置的子模块
 
 `git submodule`
 
@@ -292,15 +305,17 @@ pattern：类似于正则表达式中的匹配符
 
 `git remote show <remote>`
 
-## 添加一个新的submodule
+## 添加一个新的子模块
 
-注意：如果你想删除子模块并将它的所有文件add到外面的Git仓库中，那么请在submodule的名字后面加上一个正斜杠(/)
+注意：如果你想删除子模块并将它的所有文件add到外面的Git仓库中，那么请在子模块的名字后面加上一个正斜杠(/)
 
 1. 执行 `git submodule add -b <branch> --name <name> <repository-path-or-url>`
 
-2. 添加 `.gitmodule` 文件和`submodule的文件夹`到超级项目（submodule外面git仓库，原文superproject）的目录（index）中。
+2. 添加 `.gitmodule` 文件和`submodule的文件夹`到超级项目（superproject）的目录（index）中。
 
-3. 在subproject提交（commit）此次更改
+superproject：包含有子模块的仓库
+
+3. 在超级项目提交(commit)此次更改
 
 ## 删除一个子模块
 
@@ -310,26 +325,42 @@ pattern：类似于正则表达式中的匹配符
 
 3. 运行 `git rm --cached <submodule-path>`(路径不用后跟斜杠(/))
 
-4. 在subproject提交(commit)此次更改
+4. 在超级项目提交(commit)此次更改
 
-5. 现在可以删除未追踪（untracked)的模块文件了
+5. 现在可以删除未追踪(untracked)的模块文件了
 
-## 克隆(Clone)一个带有submodules的仓库
+## 克隆(Clone)一个带有子模块的仓库
 
-1. 首先像平时那样Clone superproject的仓库
+1. 首先像平时那样克隆超级项目的仓库
 
-2. 执行`git submodule init`来初始化submodules
+2. 执行`git submodule init`来初始化子模块
 
-3. 执行`git submodule update`来抓取submodules
+3. 执行`git submodule update`来抓取子模块
 
 或者
 
 直接执行`git clone --recurse-submodules ssh://user@domain.tld/repo.git`
 
-## 查看submodules的changes
+## 查看子模块的改动
 
 `git diff --submodule`
 
-## 更新submodules各自的分支到最新的commit
+## 更新子模块各自的当前分支到最新的改动(changes)
 
 `git submodule update --remote`
+
+## 更新某个指定的submodule到它当前分支的最新changes
+
+`git submodule update --remote <submodule-name>`
+
+## 只有当所有submodules都推送(push)成功了，才推送superproject的changes
+
+`git push --recurse-submodules=check`
+
+## 推送子模块上的改动，然后再推送超级项目的改动
+
+`git push --recurse-submodules=on-demand`
+
+## 向每个子模块执行任意命令(批量操作)
+
+`git submodule foreach '<arbitrary-command-to-run>'`
