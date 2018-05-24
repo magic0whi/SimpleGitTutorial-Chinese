@@ -200,6 +200,10 @@ pattern：类似于正则表达式中的匹配符
 
 `git push <remote> <branch>`
 
+如果是在本地创建的仓库而且是第一次推送，需要加上"-u"
+
+`git push -u <remote> <branch>`
+
 ## 追踪一个远程仓库
 
 `git remote add --track <remote-branch> <remote> <url>`
