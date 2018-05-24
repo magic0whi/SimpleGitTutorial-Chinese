@@ -84,7 +84,7 @@
 
 `git commit --amend`
 
-注意：你不应该amend已经发布的commits
+注意：你不应该amend已经发布到远程服务器的commits
 
 ## commit历史
 
@@ -96,7 +96,7 @@
 
 `git log -p <file>`
 
-## 显示指定committer随时间的变化
+## 显示指定committer随时间的变化（查看他的commits）
 
 `git log --author=<committer name>`
 
@@ -119,3 +119,131 @@ pattern：类似于正则表达式中的匹配符
 ## 还原并删除stashed的changes
 
 `git stash pop`
+
+## add一个删除文件的更改但并不删除文件
+
+`git rm --cached <file>`
+
+# 分支&标签
+
+## 列出所有分支
+
+`git branch`
+
+## 切换HEAD指向的分支
+
+“HEAD”是一个指针，它决定当前的commit会提交到哪里
+
+`git checkout <branch>`
+
+## 基于当前的HEAD创建一个新分支
+
+`git branch <new-branch>`
+
+## 基于远程分支创建一个新的tracking分支（--track自动设置上游分支仓库）
+
+`git branch --track <new-branch> <remote-branch>`
+
+## 删除一个本地分支
+
+`git branch -d <branch>`
+
+## 删除一个远程分支
+
+`git push origin --delete <branch>`
+
+## 本地重命名一个分支
+
+`git branch -m <old name> <new name>`
+
+##  重命名远程分支
+
+`git push <remote> :<old name>`
+
+`git push <remote> <new name>`
+
+## 给当前commit添加标记（Tag）
+
+`git tag <tag-name>`
+
+# 更新 & 推送
+
+## 列出当前配置的remotes
+
+`git remote -v`
+
+## 查看某个remote的信息
+
+`git remote show <remote>`
+
+## 添加一个新的远程仓库
+
+`git remote add <remote> <url>`
+
+## 重命名一个remote
+
+`git remote rename <old-name> <new-name>`
+
+## 下载所有remote的changes，但是不合并（merge）到HEAD
+
+`git fetch <remote>`
+
+## 下载所有remote的changes，但是不merge到HEAD**也不清理remote上已经删除的branches**
+
+`git fetch -p <remote>`
+
+## 下载changes同时直接merge到HEAD
+
+`git pull <remote> <branch>`
+
+## 推送本地的changes到remote
+
+`git push <remote> <branch>`
+
+## 追踪一个远程仓库
+
+`git remote add --track <remote-branch> <remote> <url>`
+
+## 推送当前tags
+
+`git push --tags`
+
+## Merge & Rebase
+
+## Merge分支到当前的HEAD
+
+`git merge <branch>`
+
+## Rebase分支到当前的HEAD
+
+`git merge <branch>`
+
+注意：你不因该rebase公共的remote！（否则别人会？？？）
+
+## 驳回当前的rebase操作
+
+`git rebase --abort`
+
+## 继续rebase操作（解决冲突后）
+
+`git rebase --continue`
+
+## 解决冲突（用你配置的merge工具）
+
+`git mergetool`
+
+## 手动解决冲突（使用你的编辑器并标记文件冲突已解决）
+
+`git add <resolved-file>`
+
+ 强行删除，最为致命
+
+ `git rm <resolved-file>`
+
+ # 撤销操作（Undo）
+
+ ## 丢弃指定文件的更改
+
+--hard 同时清理stage空间和工作空间的对应文件
+
+ `git reset --hard HEAD`
