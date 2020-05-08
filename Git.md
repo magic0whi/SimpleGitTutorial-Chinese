@@ -241,16 +241,18 @@ pattern：类似于正则表达式中的匹配符
 
 `git push --tags`
 
-## 合并(Merge) & 复位基底Rebase
+## 复位基底Rebase
 
+普通的merge操作增加一个commit来合并，而用rebase可以避免
+Rebase的真实用途是让log看起来更简洁(但rebase操作对其他人很不友好)
+
+具体用法:
+```console
+$ git rebase -i HEAD~10
 ```
-Rebase介绍详情请见
-https://isming.info/2014/09/26/git-rebase-merge/
-和
-https://github.com/geeeeeeeeek/git-recipes/wiki/5.1-%E4%BB%A3%E7%A0%81%E5%90%88%E5%B9%B6%EF%BC%9AMerge%E3%80%81Rebase-%E7%9A%84%E9%80%89%E6%8B%A9
-```
-总之Rebase和Merge的区别在于merge会增加一个commit来合并，而用rebase会让git log查看时更平滑，rebase也被用来在本地的一些commits还没推送时修改commit的附带信息，详情请见
-https://gist.github.com/nepsilon/156387acf9e1e72d48fa35c4fabef0b4#not-pushed--old-commit
+然后在打开的文件中修改, 将 commit 前的 `pick` 改成:
+* `edit` 如果你想修改这次 commit 的改动内容和信息
+* `squash` 如果你想将此 commit 合并到上面那行的 commit 里
 
 ## 合并分支到当前的HEAD
 
